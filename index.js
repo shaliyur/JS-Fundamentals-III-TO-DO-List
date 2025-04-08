@@ -6,9 +6,9 @@ console.log('My code is running');
 let btn = document.querySelector('button');
 let user_input = document.querySelector('input');
 let form = document.querySelector('form');
-let dlt_btn = document.getElementById('delete-btn');
+let complete_btn = document.getElementById('complete-btn');
 let chg_btn = document.getElementById('change-btn');
-
+let rmv_btn = document.getElementById('remove-btn');
 
 function createTask(event){
   //This is how we access user input - eventObject.target.value
@@ -79,20 +79,57 @@ function changeTask(event){
   }
 }
 
-function deleteTask(event){
+function completeTask(event){
+  event.preventDefault();
+
+  let task_ID = 'task-'+document.getElementById('complete-task-ID').value;
+
+  //obtain the HTML element for the associated task ID
+  let taskToComplete = document.getElementById(task_ID);
+
+  if (taskToComplete){
+    //
+    taskToComplete.style.color = "green";
+  }
+  else{
+    console.log('Task ID not recognized');
+  }
+}
+
+function removeTask(event){
   //
+  event.preventDefault();
+
+  let task_ID = 'task-'+document.getElementById('remove-task-ID').value;
+
+  //obtain HTML element for the list
+  let list = document.getElementById("task-list");
+
+  //obtain HTML element for the task to be revmoed
+  let task = document.getElementById(task_ID);
+
+  if (task){
+    list.removeChild(task);
+  }
+  else{
+    console.log('Task ID not recognized');
+  }
 }
 
 form.addEventListener("submit", (event) => {
   createTask(event);
 });
 
-dlt_btn.addEventListener('click', (event) => {
-  deleteTask(event);
+complete_btn.addEventListener('click', (event) => {
+  completeTask(event);
 })
 
 chg_btn.addEventListener('click', (event) => {
   changeTask(event);
+})
+
+rmv_btn.addEventListener('click', (event) => {
+  removeTask(event);
 })
 
 // newTaskElement.addEventListener("click", () => {
