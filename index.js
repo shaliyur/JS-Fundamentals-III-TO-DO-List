@@ -6,6 +6,9 @@ console.log('My code is running');
 let btn = document.querySelector('button');
 let user_input = document.querySelector('input');
 let form = document.querySelector('form');
+let dlt_btn = document.getElementById('delete-btn');
+let chg_btn = document.getElementById('change-btn');
+
 
 function createTask(event){
   //This is how we access user input - eventObject.target.value
@@ -56,8 +59,42 @@ function createTask(event){
 // document.getElementById("task-list").prepend()
 }
 
+function changeTask(event){
+  //
+  event.preventDefault();
+  //obtain the task element to be changed
+  let task_ID = 'task-'+document.getElementById('change-input-ID').value;
+
+  //obtain the new task text
+  let revisedTask = document.getElementById('revised-value').value;
+
+  //obtain the HTML element for the associated task ID
+  let taskToChange = document.getElementById(task_ID);
+
+  if (taskToChange) {
+    taskToChange.textContent = revisedTask;
+  }
+  else{
+    console.log('Task ID not recognized');
+  }
+}
+
+function deleteTask(event){
+  //
+}
+
 form.addEventListener("submit", (event) => {
   createTask(event);
 });
 
+dlt_btn.addEventListener('click', (event) => {
+  deleteTask(event);
+})
 
+chg_btn.addEventListener('click', (event) => {
+  changeTask(event);
+})
+
+// newTaskElement.addEventListener("click", () => {
+//  newTaskElement.classList.toggle("completed";)
+//});
